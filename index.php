@@ -1,136 +1,94 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
-    <script src="https://kit.fontawesome.com/ff295c2205.js" crossorigin="anonymous"></script>
+<?php    
+/*
+ * PHP QR Code encoder
+ *
+ * Exemplatory usage
+ *
+ * PHP QR Code is distributed under LGPL 3
+ * Copyright (C) 2010 Dominik Dzienia <deltalab at poczta dot fm>
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
+ */
     
-    <link rel="stylesheet" href="assets/css/index-styles.css" />
-    <title>SmartIDCoder</title>
-    <link rel="icon" href="/assets/images/favicon.ico" type="image/x-icon">
-  </head>
-  <body>
-    <nav>
-      <div class="nav__bar">
-        <a href="#">SmartIDCoder</a>
-        <div class="nav__menu__btn" id="menu-btn">
-          <i class="fas fa-bars"></i>
-        </div>
-      </div>
-      <ul class="nav__links" id="nav-links">
-        <li><a href="#home">Home</a></li>
-        <li><a href="#footer">About</a></li>
-        <li><a href="#contact">Contact</a></li>
-        <li><a href="#banner__container">Gallery</a></li>
-        <li><a href="sign in-up.php">Generate-QR</a></li>
-      </ul>
-    </nav>
-    <header class="section__container header__container" id="home">
-      <div class="header__image">
-        <img src="assets/images/qr-code-scan.png" alt="header"  />
-      </div>
-      <div class="header__content">
-        <h1>Modern Technology<br /><span>SmartIDCoder</span></h1>
-        <p class="section__description">
-        "Welcome to SmartIDCoder, where functionality meets finesse. We take pride in seamlessly merging cutting-edge QR code technology with elegant ID card design,
-         ensuring a secure and stylish identification experience. Unveil the future of identification with us!"
-        </p>
-        <div class="header__btn">
-        <a href="sign in-up.php">
-    <button class="btn">CREATE ACCOUNT</button>
-</a>
-        </div>
-      </div>
-    </header>
+    echo "<h1>PHP QR Code</h1><hr/>";
+    
+    //set it to writable location, a place for temp generated PNG files
+    $PNG_TEMP_DIR = dirname(__FILE__).DIRECTORY_SEPARATOR.'temp'.DIRECTORY_SEPARATOR;
+    
+    //html PNG location prefix
+    $PNG_WEB_DIR = 'temp/';
 
-    <section class="banner__container" id="banner__container">
-      <div class="banner__card">
-        <h4>"Unlocking a new era of elegance and security with QR-coded ID cards."</h4>
-      </div>
-      <div class="banner__card">
-        <h4>"Embrace the future of identification with SmartIDCoder."</h4>
-      </div>
-      <div class="banner__image">
-        <img src="assets/images/1.jpg" alt="banner" />
-      </div>
-    </section>
+    include "qrlib.php";    
+    
+    //ofcourse we need rights to create temp dir
+    if (!file_exists($PNG_TEMP_DIR))
+        mkdir($PNG_TEMP_DIR);
+    
+    
+    $filename = $PNG_TEMP_DIR.'test.png';
+    
+    //processing form input
+    //remember to sanitize user input in real-life solution !!!
+    $errorCorrectionLevel = 'L';
+    if (isset($_REQUEST['level']) && in_array($_REQUEST['level'], array('L','M','Q','H')))
+        $errorCorrectionLevel = $_REQUEST['level'];    
 
-       <section class="contact" id="contact">
-      <div class="section__container contact__container">
-        <div class="contact__content">
-          <p class="section__subheader">CONTACT US</p>
-          <h2 class="section__header">QR codes: Your gateway to a secure and stylish identity</h2>
-          <p class="section__description">
-          "Have questions or need assistance? Our team at SmartIDCoder is here to help. Get in touch with us for personalized support and solutions."
-          </p>
-          <div class="contact__btns">
-            <button class="btn">Our Services</button>
-            <button class="btn">Contact Us</button>
-          </div>
-        </div>
-      </div>
-    </section>
+    $matrixPointSize = 4;
+    if (isset($_REQUEST['size']))
+        $matrixPointSize = min(max((int)$_REQUEST['size'], 1), 10);
+
+
+    if (isset($_REQUEST['data'])) { 
+    
+        //it's very important!
+        if (trim($_REQUEST['data']) == '')
+            die('data cannot be empty! <a href="?">back</a>');
+            
+        // user data
+        $filename = $PNG_TEMP_DIR.'test'.md5($_REQUEST['data'].'|'.$errorCorrectionLevel.'|'.$matrixPointSize).'.png';
+        QRcode::png($_REQUEST['data'], $filename, $errorCorrectionLevel, $matrixPointSize, 2);    
+        
+    } else {    
+    
+        //default data
+        echo 'You can provide data in GET parameter: <a href="?data=like_that">like that</a><hr/>';    
+        QRcode::png('PHP QR Code :)', $filename, $errorCorrectionLevel, $matrixPointSize, 2);    
+        
+    }    
+        
+    //display generated file
+    echo '<img src="'.$PNG_WEB_DIR.basename($filename).'" /><hr/>';  
+    
+    //config form
+    echo '<form action="index.php" method="post">
+        Data:&nbsp;<input name="data" value="'.(isset($_REQUEST['data'])?htmlspecialchars($_REQUEST['data']):'PHP QR Code :)').'" />&nbsp;
+        ECC:&nbsp;<select name="level">
+            <option value="L"'.(($errorCorrectionLevel=='L')?' selected':'').'>L - smallest</option>
+            <option value="M"'.(($errorCorrectionLevel=='M')?' selected':'').'>M</option>
+            <option value="Q"'.(($errorCorrectionLevel=='Q')?' selected':'').'>Q</option>
+            <option value="H"'.(($errorCorrectionLevel=='H')?' selected':'').'>H - best</option>
+        </select>&nbsp;
+        Size:&nbsp;<select name="size">';
+        
+    for($i=1;$i<=10;$i++)
+        echo '<option value="'.$i.'"'.(($matrixPointSize==$i)?' selected':'').'>'.$i.'</option>';
+        
+    echo '</select>&nbsp;
+        <input type="submit" value="GENERATE"></form><hr/>';
+        
+    // benchmark
+    QRtools::timeBenchmark();    
 
     
-    <footer class="footer" id="footer">
-      
-      <div class="section__container footer__container">
-        <div class="footer__col">
-            <span class="logo-text">SmartIDCoder</span><br><br>
-          <p class="section__description">
-          "At SmartIDCoder, our mission is to create a seamless and sophisticated identification experience, integrating cutting-edge QR technology into every card."<br><br>
-          
-          "Learn about our journey to revolutionize identification, combining modern solutions with timeless design."
-          </p>
-          <ul class="footer__socials">
-            <li>
-              <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
-            </li>
-            <li>
-              <a href="#" target="_blank"><i class="fab fa-google"></i></a>
-            </li>
-            <li>
-              <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
-            </li>
-            <li>
-              <a href="#" target="_blank"><i class="fab fa-youtube"></i></a>
-            </li>
-          </ul>
-        </div>
-        <div class="footer__col">
-          <h4>Generate your Qr in simple steps</h4>
-          <ul class="footer__links">
-            <li><a href="#">Step 1: Make your own account </a></li>
-            <li><a href="#">Step 2: Fill in the details in the form</a></li>
-            <li><a href="#">Step 3: Choose specific Photo to upload </a></li>
-            <li><a href="#">Step 4: Generate your id and Download it</a></li>
-          </ul>
-        </div>
-        <div class="footer__col">
-          <h4>Generate you id with ease</h4>
-          <ul class="footer__links">
-            <li>
-              <p>
-              Explore the features that set us apart - from secure QR codes to customizable designs, 
-              we offer a range of options to suit your needs
-              </p>
-            </li>
-            <li>
-              <p>
-              QR codes: Your gateway to a secure and stylish identity
-              </p>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </footer>
-    <div class="footer__bar">
-      Copyright © 2023 GPN(IT) Grp no-5 Grishma, Vibhuti, Aaliya. All rights reserved.
-    </div>
-
-    <script src="https://unpkg.com/scrollreveal"></script>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
-    <script src="assets/js/index-js.js"></script>
-  </body>
-</html>
