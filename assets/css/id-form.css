@@ -1,0 +1,382 @@
+/* styles.css */
+
+body {
+        font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #161616;
+        background-size: cover;
+    background-position: center;
+}
+
+.container {
+    display: flex;
+    max-width: 1060px;
+    margin: 50px auto;
+    margin-left: 150px;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)),
+  url(/assets/images/bg.jpg);
+    background-size: cover;
+    background-position: center;
+    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.42);
+    border-radius: 15px;
+    overflow: hidden;
+    transition: margin-left 0.3s ease; 
+}
+
+.form-container {
+    width: 60%;
+    padding: 20px;
+    box-sizing: border-box;
+    margin-right: 10px;
+}
+
+.form-container h1 {
+    font-weight: bold;
+    color: #ffffff;
+}
+.input-columns {
+    display: flex;
+}
+
+.input-column {
+    flex: 1;
+    margin-right: 20px; /* Add margin between columns */
+    padding-right: 20px; /* Optionally, you can add padding as well */ 
+}
+
+.input-container {
+    margin-bottom: 10px;
+}
+
+.input-container label {
+    display: block;
+    margin-bottom: 5px;
+    color: #B9B4C7;
+    font-weight: bolder;
+}
+
+.input-container input{
+    width: 100%;
+    padding: 8px;
+    border: 2px solid #B9B4C7;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+.input-container select {
+    width: 105%;
+    padding: 8px;
+    border: 2px solid #B9B4C7;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.input-container input[type="file"] {
+    width: 105%; /* Adjust width as needed */
+    padding: 8px;
+    border: 2px solid #B9B4C7;
+    color: #9290C3;
+    border-radius: 8px;
+    box-sizing: border-box; /* Ensure padding and border are included in width */
+}
+
+.form-container input[type="submit"] {
+    background-color: #1B1A55;
+    color: #fff;
+    cursor: pointer;
+    margin-top: 10px;
+    padding: 8px;
+    border: none;
+    border-radius: 8px;
+    width: 100%; /* Adjust width as needed */
+}
+
+.form-container input[type="submit"]:hover {
+    background-color: #2d345b;
+}
+
+/* Adjustments for signature field */
+.sign-container label[for="signature"] {
+    display: block;
+    margin-bottom: 5px;
+    color: #B9B4C7;
+    font-weight: bolder;
+}
+
+.sign-container input[type="file"]#signature {
+    width: 105%; /* Adjust width as needed */
+    padding: 8px;
+    border: 2px solid #B9B4C7;
+    color: #9290C3;
+    border-radius: 8px;
+    box-sizing: border-box; /* Ensure padding and border are included in width */
+}
+
+/* New styles for ID card signature */
+.signature {
+    width: 270px;
+    height: 20px;
+    margin-top: 10px;
+}
+
+.signature-label {
+    font-weight: bold;
+    font-size: 16px;
+    color: #9290C3; /* Change this to your desired color */
+    margin: 5px; /* Adjust this value as needed */
+}
+
+
+button {
+    margin-top: 10px;
+    padding: 8px 12px;
+    background-color: #535C91;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    width: 100%;
+}
+
+button:hover {
+    background-color: #7077A1;
+}
+
+.id-card-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    margin-top: 120px;
+}
+
+.id-card {
+    width: 80%;
+    height: 90%;
+    transform-style: preserve-3d;
+    transition: transform 0.5s;
+    box-sizing: border-box;
+    border-radius: 20px;
+    box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.42);
+}
+
+.front,
+.back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    box-sizing: border-box;
+}
+
+.front {
+    background-color: transparent;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.front p {
+    font-size: 18px;
+    margin: 3px;
+    color: #fff;
+}
+
+.front h1 {
+    font-size: 16px;
+    font-weight: bold;
+    color: #DDE6ED;
+    margin-bottom: 5px;
+}
+
+.front .info-box {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.front .info {
+    width: 420px;
+    margin: 3px;
+    padding: 5px;
+    background-color: transparent;
+    border-radius: 8px;
+    border: 2px solid #B9B4C7;
+    text-align: left;
+}
+
+.front .info .label {
+    display: inline-block;
+    font-weight: bold;
+    font-size: 12px;
+    color: #DDE6ED;
+}
+
+.front .info .value {
+    display: inline-block;
+    font-size: 10px;
+    color: #E4F1FF;
+    margin-top: 5px;
+}
+
+.front .name {
+    font-size: 14px;
+    margin: 3px;
+    color: #9290C3;
+    text-align: center;
+}
+
+.front .college-address {
+    font-size: 12px;
+    color: #9290C3;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.front .photo {
+    width: 120px;
+    height: 120px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: 5px solid transparent;
+    border-radius: 10%;
+    outline: 5px solid #B9B4C7;
+}
+
+.id-card-container:hover .id-card {
+    transform: rotateY(180deg);
+}
+
+.back {
+    transform: rotateY(180deg);
+    background-color: transparent;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.back h1 {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.back .qr-code {
+    width: 180px;
+    height: 180px;
+    margin-top: 20px;
+    border: 1px solid #ccc;
+}
+
+.back .qr-text {
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    text-align: center;
+}
+
+/* ... (your existing styles) ... */
+
+.header-content {
+    display: flex;
+    align-items: center;
+    color: #ffffff;
+    padding: 20px;
+    text-align: left;
+    margin-left: 120px;
+}
+
+.header-content img {
+    max-height: 280px;
+    margin-right: 20px;
+}
+
+.header-content .text-content {
+    display: block; /* Set to block to stack elements */
+}
+
+.header-content h1 {
+    margin: 0;
+}
+
+.header-content p {
+    margin: 5px 0;
+}
+
+/* Add this to your existing CSS file */
+
+.feedback-container {
+    margin-top: 50px;
+    padding: 20px;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)),
+  url("/assets/images/feed.jpg");
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+.feedback-container h2, .feedback-container h3 {
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 10px;
+    text-align: left;
+    margin-left: 150px;
+}
+
+.feedback-container p {
+    color: #ffffff;
+    margin-bottom: 10px;
+    text-align: left;
+    margin-left: 150px;
+}
+
+.feedback-container form {
+    display: flex;
+    flex-direction: column;
+}
+
+.feedback-container label {
+    text-align: left;
+    margin-left: 150px;
+    margin-bottom: 5px;
+    color: #ffffff;
+}
+
+.feedback-container .input-group {
+    display: flex;
+    justify-content: flex-start;
+    margin-left: 150px;
+}
+
+.feedback-container input[type="text"] {
+    margin-bottom: 10px;
+    padding: 8px;
+    border: 1px solid #B9B4C7;
+    border-radius: 3px;
+    background-color: #333;
+    color: #ffffff;
+    width: 400px;
+    vertical-align: top;
+}
+
+.feedback-container input[type="submit"] {
+    margin-left: 20px;
+    margin-top: -2px;
+    padding: 8px;
+    background-color: #1B1A55;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    height: 40px;
+}

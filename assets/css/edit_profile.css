@@ -1,0 +1,81 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #161616;
+}
+
+header {
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+}
+
+.container {
+    max-width: 400px;
+    margin: 20px auto;
+    background-color:transparent;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(255, 254, 254, 0.1);
+}
+
+section {
+    margin-bottom: 20px;
+}
+
+form {
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #fff;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.custom-button {
+    display: inline-block;
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+    border: none; /* Remove default button border */
+    border-radius: 5px;
+    cursor: pointer; /* Add pointer cursor for buttons */
+    margin-right: 10px; /* Add margin between buttons */
+}
+
+.custom-button:hover {
+    background-color: #555;
+}
+
+
+
+.error-message {
+    color: #ff0000;
+    margin-top: 10px;
+}
+
+/* Styles inspired by dashboard.css */
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* Add more styles as needed */

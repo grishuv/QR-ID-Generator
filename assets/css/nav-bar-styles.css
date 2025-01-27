@@ -1,0 +1,150 @@
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: transparent;
+        background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.material-symbols-outlined {
+    color: white;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 110px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background: transparent;
+    backdrop-filter: blur(20px);
+    border-right: 1px solid rgb(255, 255, 255);
+    transition: width 0.3s ease;
+}
+
+.sidebar:hover {
+    width: 260px;
+}
+
+.sidebar .logo {
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    padding: 25px 10px 15px;
+}
+
+.logo img {
+    width: 43px;
+    border-radius: 50%;
+    filter: drop-shadow(5px 5px 5px #bbbbec);
+    -webkit-filter: drop-shadow(5px 5px 5px #bbbbec);
+}
+
+.logo h2 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin-left: 15px;
+    display: none;
+}
+
+.sidebar:hover .logo h2 {
+    display: block;
+}
+
+.sidebar .links {
+    list-style: none;
+    margin-top: 20px;
+    overflow-y: auto;
+    scrollbar-width: none;
+    height: calc(100% - 140px);
+}
+
+.sidebar .links::-webkit-scrollbar {
+    display: none;
+}
+
+.links li {
+    display: flex;
+    border-radius: 4px;
+    align-items: center;
+}
+
+.links li:hover {
+    cursor: pointer;
+    background: #ffffff36;
+}
+
+.links h4 {
+    color: #ffffff;
+    font-weight: 500;
+    display: none;
+    margin-bottom: 10px;
+}
+
+.sidebar:hover .links h4 {
+    display: block;
+}
+
+.links hr {
+    margin: 10px 8px;
+    border: 1px solid #ffffff;
+}
+
+.sidebar:hover .links hr {
+    border-color: transparent;
+}
+
+.links li span {
+    padding: 12px 10px;
+}
+
+.links li a {
+    padding: 10px;
+    color: #fff;
+    display: none;
+    font-weight: 500;
+    white-space: nowrap;
+    text-decoration: none;
+}
+
+.sidebar:hover .links li a {
+    display: block;
+}
+
+.links .logout-link {
+    margin-top: 20px;
+}
+
+.sidebar-open .container {
+    margin-left: 260px; /* Adjust margin to match the expanded sidebar width */
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6); /* Adjust the opacity as needed */
+    display: none;
+    pointer-events: none; /* Allow interactions with elements beneath the overlay */
+    z-index: 1; /* Ensure the overlay is above other content */
+  }
+  
+  .sidebar {
+    z-index: 2; /* Ensure the sidebar is above the overlay */
+  }
+  
+  .sidebar:hover + .overlay {
+    display: block;
+  }
+  
+  .sidebar:hover {
+    z-index: 3; /* Ensure the expanded sidebar is above the overlay */
+  }

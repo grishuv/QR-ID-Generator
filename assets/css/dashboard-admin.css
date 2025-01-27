@@ -1,0 +1,118 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    text-align: left;
+    margin-top: 20px;
+    margin-left: 10px;
+    font-size: 40px;
+    margin-bottom: -40px;
+}
+
+.admin-container {
+    display: flex;
+    flex-wrap: wrap; /* Allow containers to wrap to the next line */
+    justify-content: space-around;
+    margin-top: 50px;
+    overflow: hidden;
+}
+
+.count-container {
+    text-align: center;
+    padding: 2px;
+    border: 1px solid #9290C3;
+    border-radius: 20px;
+    background-color: #191919;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+    flex: 0 5 calc(33.33% - 10px); /* Adjust the flex property and max-width */
+    margin-bottom: 10px; /* Adjust the margin between containers */
+    line-height: 2;
+}
+
+.chart-feedback-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.chart-container {
+    width: 65%;
+    margin-left: 10px;
+    background-color: #191919;
+    border-radius: 20px;
+    margin-top: 20px;
+}
+
+.count-container:hover {
+    transform: scale(1.02);
+}
+
+.feedback-container {
+    width: 31%;
+    margin-left: 20px;
+    padding: 20px;
+    border: 2px solid #9290C3;
+    border-radius: 20px;
+    background-color: #191919;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    color: #fff;
+    margin-top: 20px;
+    overflow: hidden;
+}
+
+.feedback-container h2 {
+    color: #fff; /* Purple color for the title */
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+}
+
+.feedback-container ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.feedback-container li {
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+    color: #CDD9ED; /* Light blue color for the feedback text */
+    border-bottom: 1px solid #576179; /* Dark blue color for the border between feedback items */
+    padding-bottom: 8px;
+}
+
+.feedback-container li:last-child {
+    border-bottom: none; /* Remove the border for the last feedback item */
+}
+
+.feedback-container p {
+    font-size: 1.2rem;
+    color: #BB86FC; /* Purple color for the message when there are no feedbacks */
+}
+
+h2 {
+    color: #fff;
+    font-size: 1.5rem;
+}
+
+p {
+    color: #fff;
+    font-size: 2rem;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.fas.fa-users {
+    color: #BB86FC; /* Green color for users icon */
+}
+
+.fas.fa-id-card {
+    color: #BB86FC; /* Blue color for ID cards icon */
+}
+
+.fas.fa-comment {
+    color: #BB86FC; /* Red color for comments icon */
+}
+
+
